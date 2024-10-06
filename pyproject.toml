@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "asim"
+version = "0.0.1"
+description = "An Assembly Language Based on CPU Simulator"
+authors = ["moyan <1561515308@qq.com>"]
+license = "LGPL"
+readme = "README.md"
+packages = [{"include"="asimc"}, {"include"="asimr"}]
+
+[tool.poetry.scripts]
+asimc = "asimc:cli"
+asimr = "asimr:cli"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+loguru = "^0.7.2"
+zstandard = "^0.23.0"
+jinja2 = "^3.1.4"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+pytest = "^8.3.3"
+mkdocs = "^1.6.1"
+pytest-html = "^4.1.1"
+pytest-mock = "^3.14.0"
+memory-profiler = "^0.61.0"
+
+[[tool.poetry.source]]
+name = "mirrors"
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
+priority = "primary"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
