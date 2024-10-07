@@ -8,8 +8,7 @@ from asimc.log import logger
 from asimc.parser import Parser
 from asimc.funcs import funcs
 from asimr.constant import tmp
-
-
+    
 def asm(file, output_file, pretend, include_dir=None, worker=1, level=5):
 
     if output_file is None and pretend:
@@ -23,11 +22,8 @@ def asm(file, output_file, pretend, include_dir=None, worker=1, level=5):
         logger.error("File does not exist.")
         sys.exit()
 
-    logger.info(f"Input file: {file}")
-    logger.info(f"Output file: {output_file}")
-    logger.info(f"processes: {worker}")
+    logger.info(f"{worker} processes are used")
     logger.info(f"Compression level：{level}")
-
     logger.info("Preprocessing..")
     tmp["inc_dir"] = ["."] + include_dir
 
@@ -58,8 +54,7 @@ def asm(file, output_file, pretend, include_dir=None, worker=1, level=5):
     with open(output_file, "wb") as of:
         of.write(b"zstd" + data)
     logger.success("Done.")
-
-
+    
 def main():
     parser = argparse.ArgumentParser(description="Compile an assembly file.")
     parser.add_argument(
@@ -69,7 +64,7 @@ def main():
         "-o",
         "--output",
         type=str,
-        default=None,
+        default="out.acb",
         help="The path to the output file.",
     )
     parser.add_argument(

@@ -7,7 +7,6 @@ import base64
 import zstandard
 import pickle
 
-
 class Parser:
     def __init__(self, code: str, max_worker=1):
         self.code = code
@@ -28,7 +27,7 @@ class Parser:
             # 更新下一个部分的起始索引
             start = end
         return divided_lists
-
+        
     def parser(self):
         lines = self.code.split("\n")
         num_processes = min(self.worker, len(lines))  # 可以根据实际情况调整进程数
@@ -48,7 +47,7 @@ class Parser:
         results = sorted(results, key=lambda x: x[1])
         for out, n in results:
             self.out = self.out + out
-
+            
     def handler(self, code, n):
         parser = CodeParser()
         parser.parser(code)
@@ -113,7 +112,7 @@ class CodeParser:
             op = operands[i]
             if op == "":
                 continue
-
+                
             elif op.startswith("&"):  # 内存地址
                 type = OperandType.Memory
                 value = op[1:]
@@ -161,12 +160,12 @@ class CodeParser:
                 raise GrammarError(f"Incorrect operand type: {op}", {"Line": self.line})
 
             yield Operand(value, type)
-
+    
     def parser_l(self, line: str):
-        line = line.split(";")[0]  # 去除行尾注释
-
+        line = line.split(';')[0] # 去除行尾注释
+        
         line_l = line.split(" ")
-
+        
         if line in ["", "\n"]:  # 空行
             return
 
@@ -186,19 +185,19 @@ class CodeParser:
 
         else:  # 普通指令
             opcode = self.find_inst(line_l[0])
-            operands = self.parsern_operand(line_l[1:])  # 解析操作数
+            operands = self.parsern_operand(line_l[1:]) # 解析操作数
             inst = Instruction(opcode, *operands)
             return inst.pack()
-
+            
     def parser(self, code):
         for l in code:
             l = l.strip()
-
+            
             if l == "":  # 处理空行
                 continue
-
+            
             res = self.cache.get(l)
-
+            
             if res == -1:  # 缓存未命中时才执行解析
                 result = self.parser_l(l)
                 # 在放入缓存前检查result的有效性，避免存储无效结果
@@ -206,8 +205,8 @@ class CodeParser:
                     self.cache.put(l, result)
             else:
                 result = res
-
+            
             if result:
                 self.out.instructions.append(result)
-
+            
             self.line += 1

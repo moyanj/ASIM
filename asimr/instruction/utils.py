@@ -1,6 +1,5 @@
 from asimr.constant import OperandType
 
-
 def get_value(cpu, operand):
     if operand.type == OperandType.Number:
         return operand.value
@@ -15,3 +14,4 @@ def write_value(cpu, operand_type, address, data):
         return cpu.register.set(address, data)
     elif operand_type == OperandType.Memory:
         return cpu.memory.write(address, data)
+    

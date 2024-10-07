@@ -2,7 +2,6 @@ from asimr.constant import InstructionSet, OperandType, error
 import sys
 from .utils import get_value, write_value
 
-
 def HALT(cpu, ins):
     sys.exit()
 
@@ -59,7 +58,7 @@ def ADD(cpu, ins):
     source_value = get_value(cpu, ins.source)
     # 获取目标操作数的值
     target_value = get_value(cpu, ins.target)
-
+    
     # 执行加法操作
     result = target_value + source_value
     # 将结果写回到目标操作数
@@ -151,7 +150,6 @@ def NOT(cpu, ins):
     # 将结果写回到目标操作数
     write_value(cpu, ins.target.type, ins.target.value, result)
 
-
 def XOR(cpu, ins):
     # 获取源操作数的值
     source_value = get_value(cpu, ins.source)
@@ -163,7 +161,6 @@ def XOR(cpu, ins):
 
     # 将结果写回到目标操作数
     write_value(cpu, ins.parameter.type, ins.parameter.value, result)
-
 
 def SHL(cpu, ins):
     # 获取源操作数的值
@@ -177,7 +174,6 @@ def SHL(cpu, ins):
     # 将结果写回到目标操作数
     write_value(cpu, ins.parameter.type, ins.parameter.value, result)
 
-
 def SHR(cpu, ins):
     # 获取源操作数的值
     source_value = get_value(cpu, ins.source)
@@ -189,7 +185,6 @@ def SHR(cpu, ins):
 
     # 将结果写回到目标操作数
     write_value(cpu, ins.parameter.type, ins.parameter.value, result)
-
 
 def JMP(cpu, ins):
     # 获取源操作数的值
