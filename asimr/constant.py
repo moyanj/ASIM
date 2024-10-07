@@ -2,7 +2,9 @@ from enum import Enum, auto
 import sys
 from dataclasses import dataclass, field
 import time
+import importlib.metadata as im
 
+__version__ = im.version("asim")
 
 class InstructionSet(Enum):
     def _generate_next_value_(name, start, count, last_values):

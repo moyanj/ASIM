@@ -109,7 +109,7 @@ class CodeParser:
         for i in range(0, 3):
             if i >= len(operands):
                 break
-            print(i)
+
             op = operands[i]
             if op == "":
                 continue

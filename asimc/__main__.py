@@ -7,8 +7,7 @@ import jinja2
 from asimc.log import logger
 from asimc.parser import Parser
 from asimc.funcs import funcs
-from asimr.constant import tmp
-
+from asimr.constant import tmp, __version__
 
 def asm(file, output_file, pretend, include_dir=None, worker=1, level=5):
 
@@ -16,14 +15,14 @@ def asm(file, output_file, pretend, include_dir=None, worker=1, level=5):
         output_file = os.path.splitext(file)[0] + ".acp"
     else:
         output_file = output_file or os.path.splitext(file)[0] + ".acb"
-
+    logger.info(f"ASIM Compiler v{__version__}")
     logger.info("Start Compile...")
 
     if not os.path.exists(file) and not os.path.isfile(file):
         logger.error("File does not exist.")
         sys.exit()
 
-    logger.info(f"{worker} processes are used")
+    logger.info(f"Processes: {worker}")
     logger.info(f"Compression level：{level}")
     logger.info("Preprocessing..")
     tmp["inc_dir"] = ["."] + include_dir
