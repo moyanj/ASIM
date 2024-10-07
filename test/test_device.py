@@ -2,7 +2,6 @@ from asimr.device import Memory, Stack, Register
 from asimr.constant import MemoryError, ASIMError
 import pytest
 
-
 def test_write_out_of_bounds():
     mem = Memory(8)
     with pytest.raises(MemoryError):
@@ -84,7 +83,7 @@ def test_set_get_register():
 def test_out_of_range_register_set():
     reg = Register()
     with pytest.raises(ASIMError):
-        reg.set(32, 0x12345678)  # 尝试设置一个不存在的寄存器
+        reg.set(32, 0x12)  # 尝试设置一个不存在的寄存器
 
 
 def test_out_of_range_register_get():
