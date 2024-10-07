@@ -11,6 +11,7 @@ from asimr.constant import tmp
 
 
 def asm(file, output_file, pretend, include_dir=None, worker=1, level=5):
+
     if output_file is None and pretend:
         output_file = os.path.splitext(file)[0] + ".acp"
     else:
@@ -47,6 +48,7 @@ def asm(file, output_file, pretend, include_dir=None, worker=1, level=5):
         return
 
     logger.info("Parsing...")
+    
     p = Parser(f_t.render(**funcs), worker)
     p.parser()
     logger.info("Saving...")

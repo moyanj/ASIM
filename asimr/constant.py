@@ -76,7 +76,7 @@ class SyscallTable(Enum):
 
 @dataclass
 class Program:
-    instructions: list["Instruction"] = field(default_factory=list)
+    instructions: list[bytes] = field(default_factory=list)
     data_mem: int = 8 * 1024 * 1024
     inst_mem: int = 8 * 1024 * 1024
     n_GPR: int = 16
@@ -84,6 +84,7 @@ class Program:
     labels: dict[str, int] = field(default_factory=dict)
     include_file: list[str] = field(default_factory=list)
     compilation_time: int = int(time.time())
+    
 
     def __add__(self, other: "Program") -> "Program":
         if not isinstance(other, Program):
@@ -97,6 +98,86 @@ class Program:
         self.labels.update(other.labels)
         self.include_file = self.include_file + other.include_file
         return self
+
+    def dumps(self):
+        """
+        打包为二进制文件
+        """
+        data = bytearray()
+        data += b"ASIM"
+
+        data += self.inst_mem.to_bytes(4, "little")
+        data += self.data_mem.to_bytes(4, "little")
+        data += self.n_GPR.to_bytes(4, "little")
+        data += self.stack_size.to_bytes(4, "little")
+        data += self.compilation_time.to_bytes(8, "little")
+
+        data += len(self.labels).to_bytes(4, "little")
+        for k, v in self.labels.items():
+            data += len(k.encode()).to_bytes(2, "little")
+            data += k.encode()
+            data += v.to_bytes(4, "little")
+        
+        data += len(self.include_file).to_bytes(4, "little")
+        for file in self.include_file:
+            data += len(file.encode()).to_bytes(2, "little")
+            data += file.encode()
+
+        data += len(self.instructions).to_bytes(4, "little")
+        for ins in self.instructions:
+            data += len(ins).to_bytes(2, "little")
+            data += ins
+
+        return bytes(data)
+    
+    @classmethod
+    def load(cls, data: bytes):
+        self = cls()
+        data = bytearray(data)
+        magic = data[:4]
+        assert magic == b"ASIM"
+        data = data[4:]
+        self.inst_mem = int.from_bytes(data[:4], "little")
+        data = data[4:]
+        self.data_mem = int.from_bytes(data[:4], "little")
+        data = data[4:]
+        self.n_GPR = int.from_bytes(data[:4], "little")
+        data = data[4:]
+        self.stack_size = int.from_bytes(data[:4], "little")
+        data = data[4:]
+        self.compilation_time = int.from_bytes(data[:8], "little")
+        data = data[8:]
+        n_labels = int.from_bytes(data[:4], "little")
+        data = data[4:]
+        for _ in range(n_labels):
+            n = int.from_bytes(data[:2], "little")
+            data = data[2:]
+            k = data[:n].decode()
+            data = data[n:]
+            v = int.from_bytes(data[:4], "little")
+            data = data[4:]
+            self.labels[k] = v
+        n_include = int.from_bytes(data[:4], "little")
+        data = data[4:]
+        for _ in range(n_include):
+            n = int.from_bytes(data[:2], "little")
+            data = data[2:]
+            self.include_file.append(data[:n].decode())
+            data = data[n:]
+        
+        n_ins = int.from_bytes(data[:4], "little")
+        data = data[4:]
+        for _ in range(n_ins):
+            n = int.from_bytes(data[:2], "little")
+            data = data[2:]
+            self.instructions.append(data[:n])
+            data = data[n:]
+
+        return self
+
+
+
+
 
 
 def error(text):
