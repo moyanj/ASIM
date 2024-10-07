@@ -149,8 +149,9 @@ class CodeParser:
 
             elif op.startswith("#"):  # 标签
                 type = OperandType.Number
-                n = self.out.labels.get(op[1:], None)
-                if n:
+                n = self.out.labels.get(op[1:], -1)
+                
+                if n != -1:
                     value = n
                 else:
                     raise GrammarError(
@@ -163,8 +164,8 @@ class CodeParser:
             yield Operand(value, type)
 
     def parser_l(self, line: str):
-        line = line.split(";")[0]  # 去除行尾注释
 
+        line = line.split(";")[0]  # 去除行尾注释
         line_l = line.split(" ")
 
         if line in ["", "\n"]:  # 空行
@@ -174,6 +175,7 @@ class CodeParser:
             return
 
         elif line.startswith("#"):  # 标签定义
+            print(f"Label definition: {line}")
             label_name = line[1:].strip()
             if label_name in self.out.labels:
                 raise GrammarError(
