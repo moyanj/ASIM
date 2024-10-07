@@ -127,7 +127,6 @@ class Core:
     def run_ins(self, ins):
         ins = Instruction.unpack(ins)
         name = ins.opcode.name
-        print(name)
         if hasattr(instruction, name):
             func = getattr(instruction, name)
             func(self, ins)

@@ -104,12 +104,11 @@ class CodeParser:
         obj = pickle.loads(decommpress)
         self.out.instructions += obj.instructions
 
-    @lru_cache(64)
     def parsern_operand(self, operands):
-        for i in range(0, 2):
-            if i > len(operands) - 1:
+        for i in range(0, 3):
+            if i >= len(operands):
                 break
-                
+            print(i)
             op = operands[i]
             if op == "":
                 continue
@@ -204,7 +203,7 @@ class CodeParser:
                 self.cache.put(l, result)
             else:
                 result = res
-                
+            print(result)   
             if result:
                 self.out.instructions.append(result)
                 
