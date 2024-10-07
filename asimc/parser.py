@@ -196,7 +196,6 @@ class CodeParser:
             if l == "":  # 处理空行
                 continue
             
-            # 使用get方法并提供默认值None来避免不必要的-1检查
             res = self.cache.get(l)
             
             if res == -1:  # 缓存未命中时才执行解析

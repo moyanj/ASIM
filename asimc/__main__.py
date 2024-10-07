@@ -23,10 +23,10 @@ def asm(file, output_file, pretend, include_dir=None, worker=1, level=5):
 
     env = jinja2.Environment(
         loader=jinja2.DictLoader({os.path.basename(file): open(file).read()}),
-        variable_start_string="%",
-        variable_end_string="%",
-        block_start_string="{",
-        block_end_string="}",
+        variable_start_string="{",
+        variable_end_string="}",
+        block_start_string="%",
+        block_end_string="%",
     )
 
     f_t = env.get_template(os.path.basename(file))
