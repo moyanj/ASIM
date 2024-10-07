@@ -191,20 +191,23 @@ class CodeParser:
             
     def parser(self, code):
         for l in code:
-            
             l = l.strip()
             
-            if l == "": # 处理空行
+            if l == "":  # 处理空行
                 continue
-                
-            res = self.cache.get(l) # 尝试从缓存中获取结构
-            if res == -1:
+            
+            # 使用get方法并提供默认值None来避免不必要的-1检查
+            res = self.cache.get(l)
+            
+            if res == -1:  # 缓存未命中时才执行解析
                 result = self.parser_l(l)
-                self.cache.put(l, result)
+                # 在放入缓存前检查result的有效性，避免存储无效结果
+                if result:
+                    self.cache.put(l, result)
             else:
                 result = res
-            print(result)   
+            
             if result:
                 self.out.instructions.append(result)
-                
+            
             self.line += 1

@@ -1,6 +1,5 @@
-.data_mem 8
 .n_GPR 2
-ADD 1 1 r_0
-PNC r_0
+ADD 1 333 &0x12
+PNC &0x12
 PAC 10
 

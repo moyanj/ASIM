@@ -1,7 +1,6 @@
 from collections import OrderedDict
 import threading
 
-
 class LRUCache:
     def __init__(self, capacity: int):
         self.cache = OrderedDict()
@@ -13,18 +12,16 @@ class LRUCache:
             if key not in self.cache:
                 return -1
             value = self.cache.pop(key)
-            self.cache[key] = (
-                value  # Move the key to the end to show it was recently used.
-            )
+            self.cache[key] = value  # 移动到末尾表示最近使用
             return value
 
     def put(self, key, value) -> None:
         with self.lock:
             if key in self.cache:
-                self.cache.pop(key)
-            elif len(self.cache) >= self.capacity:
-                self.cache.popitem(last=False)  # Pop the first item.
+                self.cache.move_to_end(key)  # 如果已经存在，则移动到末尾
             self.cache[key] = value
+            if len(self.cache) > self.cache.maxlen:
+                self.cache.popitem(last=False)  # 弹出最老的项
 
 
 def lru_cache(capacity: int):
