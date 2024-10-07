@@ -1,6 +1,7 @@
 from collections import OrderedDict
 import threading
 
+
 class LRUCache:
     def __init__(self, capacity: int):
         self.cache = OrderedDict()

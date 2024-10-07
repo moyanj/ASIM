@@ -34,10 +34,10 @@ class InstructionSet(Enum):
     JNE = auto()  # TODO: 不等于转移
     NOP = auto()  # 无操作
     CPUID = auto()  # TODO: 获取CPU信息
-    
-    MPC = auto() # TODO: 复制pc寄存器的值
-    MSR = auto() # TODO: 复制状态寄存器的值
-    MTC = auto() # TODO: 复制频率寄存器的值
+
+    MPC = auto()  # TODO: 复制pc寄存器的值
+    MSR = auto()  # TODO: 复制状态寄存器的值
+    MTC = auto()  # TODO: 复制频率寄存器的值
 
     SDF = auto()  # TODO: 定义函数（开始）
     EDF = auto()  # TODO: 定义函数（结束）
