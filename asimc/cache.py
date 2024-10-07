@@ -21,7 +21,7 @@ class LRUCache:
             if key in self.cache:
                 self.cache.move_to_end(key)  # 如果已经存在，则移动到末尾
             self.cache[key] = value
-            if len(self.cache) > self.cache.maxlen:
+            if len(self.cache) > self.capacity:
                 self.cache.popitem(last=False)  # 弹出最老的项
 
 
