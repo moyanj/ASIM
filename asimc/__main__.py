@@ -8,7 +8,8 @@ from asimc.log import logger
 from asimc.parser import Parser
 from asimc.funcs import funcs
 from asimr.constant import tmp
-    
+
+
 def asm(file, output_file, pretend, include_dir=None, worker=1, level=5):
 
     if output_file is None and pretend:
@@ -44,7 +45,7 @@ def asm(file, output_file, pretend, include_dir=None, worker=1, level=5):
         return
 
     logger.info("Parsing...")
-    
+
     p = Parser(f_t.render(**funcs), worker)
     p.parser()
     logger.info("Saving...")
@@ -54,7 +55,8 @@ def asm(file, output_file, pretend, include_dir=None, worker=1, level=5):
     with open(output_file, "wb") as of:
         of.write(b"zstd" + data)
     logger.success("Done.")
-    
+
+
 def main():
     parser = argparse.ArgumentParser(description="Compile an assembly file.")
     parser.add_argument(

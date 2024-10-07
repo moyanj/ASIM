@@ -84,7 +84,6 @@ class Program:
     labels: dict[str, int] = field(default_factory=dict)
     include_file: list[str] = field(default_factory=list)
     compilation_time: int = int(time.time())
-    
 
     def __add__(self, other: "Program") -> "Program":
         if not isinstance(other, Program):
@@ -98,6 +97,7 @@ class Program:
         self.labels.update(other.labels)
         self.include_file = self.include_file + other.include_file
         return self
+
 
 def error(text):
     print(f"ERROR: {text}")

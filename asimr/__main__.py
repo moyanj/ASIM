@@ -7,7 +7,6 @@ from asimr.constant import Program
 
 
 def run(file):
-
     with open(file, "rb") as f:
         data = f.read()
         data = zstandard.decompress(data[4:])
@@ -27,7 +26,6 @@ def run(file):
 def main():
     parser = argparse.ArgumentParser(description="Run an assembly file.")
     parser.add_argument("file", type=str, help="The path to the assembly file to run.")
-
     args = parser.parse_args()
     run(args.file)
 

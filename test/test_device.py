@@ -2,6 +2,7 @@ from asimr.device import Memory, Stack, Register
 from asimr.constant import MemoryError, ASIMError
 import pytest
 
+
 def test_write_out_of_bounds():
     mem = Memory(8)
     with pytest.raises(MemoryError):
