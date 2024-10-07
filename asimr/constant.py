@@ -24,16 +24,16 @@ class InstructionSet(Enum):
     NOT = auto()  # 取反
     SHL = auto()  # 左移
     SHR = auto()  # 右移
-    CALL = auto()  # TODO: 调用
-    RET = auto()  # TODO: 返回
     HALT = auto()  # 关机(模拟器)
-    JMP = auto()  # TODO: 无条件跳转
-    JNZ = auto()  # TODO: 为 0 时转移
-    JZ = auto()  # TODO: 为 1 时转移
-    JE = auto()  # TODO: 等于时转移
-    JG = auto()  # TODO: 大于转移
-    JB = auto()  # TODO: 小于转移
-    JNE = auto()  # TODO: 不等于转移
+    JMP = auto()  # 无条件跳转
+    JNZ = auto()  # 不为 0 时转移
+    JZ = auto()  # 为 0 时转移
+    JE = auto()  # 等于时转移
+    JG = auto()  # 大于转移
+    JGE = auto() # 大于等于转移
+    JB = auto()  # 小于转移
+    JBE = auto() # 小于等于转移
+    JNE = auto()  # 不等于转移
     NOP = auto()  # 无操作
     CPUID = auto()  # TODO: 获取CPU信息
 
@@ -42,7 +42,9 @@ class InstructionSet(Enum):
     MTC = auto()  # TODO: 复制频率寄存器的值
 
     SDF = auto()  # TODO: 定义函数（开始）
-    EDF = auto()  # TODO: 定义函数（结束）
+    CALL = auto()  # TODO: 调用
+    RET = auto()  # TODO: 返回
+    SYSCALL = auto() # TODO: 系统调用  
 
     PNC = auto()  # 打印数字
     PAC = auto()  # 打印ASCII码
