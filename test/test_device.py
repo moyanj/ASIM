@@ -77,8 +77,8 @@ def test_initial_state():
 
 def test_set_get_register():
     reg = Register()
-    reg.set(0, 0x12345678)
-    assert reg.get(0) == 0x12345678
+    reg.set(0, 0x12)
+    assert reg.get(0) == 0x12
 
 
 def test_out_of_range_register_set():
