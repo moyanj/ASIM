@@ -1,9 +1,8 @@
 from asimc.cache import LRUCache
 from asimc.parser import Parser, CodeParser
 import asimc.funcs as asim_f
-from asimr.constant import tmp
+from asimr.constant import tmp, InstructionSet
 import pytest
-from unittest.mock import mock_open
 
 
 def test_cache_null_ret():
@@ -75,6 +74,12 @@ def test_config_inst():
     assert out.inst_mem == 114514
     assert out.n_GPR == 32
     assert out.stack_size == 128
+
+
+def test_comment():
+    code = "MOV 1 1 r_1 ; vvvv \n;sss"
+    p = CodeParser()
+    p.parser(code.split("\n"))
 
 
 # 运行测试

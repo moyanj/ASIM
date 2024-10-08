@@ -164,8 +164,8 @@ class CodeParser:
             yield Operand(value, type)
 
     def parser_l(self, line: str):
-
         line = line.split(";")[0]  # 去除行尾注释
+
         line_l = line.split(" ")
 
         if line in ["", "\n"]:  # 空行

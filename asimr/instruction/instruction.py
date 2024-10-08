@@ -256,19 +256,24 @@ def JNE(cpu, ins):
     if source_value != target_value:
         cpu.register.pc = address
 
+
 def MPC(cpu, ins):
     write_value(cpu, ins.source.type, ins.source.value, cpu.register.pc)
+
 
 def MSR(cpu, ins):
     write_value(cpu, ins.source.type, ins.source.value, cpu.register.sr)
 
+
 def MTC(cpu, ins):
     write_value(cpu, ins.source.type, ins.source.value, cpu.register.tc)
+
 
 def CALL(cpu, ins):
     source_value = get_value(cpu, ins.source)
     cpu.stack.push(cpu.register.pc)
     cpu.register.pc = source_value
+
 
 def RET(cpu, ins):
     cpu.register.pc = cpu.stack.pop()
