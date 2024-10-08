@@ -196,15 +196,18 @@ def JMP(cpu, ins):
     source_value = get_value(cpu, ins.source)
     cpu.register.pc = source_value
 
+
 def JNZ(cpu, ins):
     source_value = get_value(cpu, ins.source)
     if source_value != 0:
         cpu.register.pc = ins.target.value
 
+
 def JZ(cpu, ins):
     source_value = get_value(cpu, ins.source)
     if source_value == 0:
         cpu.register.pc = ins.target.value
+
 
 def JE(cpu, ins):
     source_value = get_value(cpu, ins.source)
@@ -213,12 +216,14 @@ def JE(cpu, ins):
     if source_value == target_value:
         cpu.register.pc = address
 
+
 def JGE(cpu, ins):
     source_value = get_value(cpu, ins.source)
     target_value = get_value(cpu, ins.target)
     address = get_value(cpu, ins.parameter)
     if source_value >= target_value:
         cpu.register.pc = address
+
 
 def JG(cpu, ins):
     source_value = get_value(cpu, ins.source)
@@ -227,6 +232,7 @@ def JG(cpu, ins):
     if source_value > target_value:
         cpu.register.pc = address
 
+
 def JB(cpu, ins):
     source_value = get_value(cpu, ins.source)
     target_value = get_value(cpu, ins.target)
@@ -234,12 +240,14 @@ def JB(cpu, ins):
     if source_value < target_value:
         cpu.register.pc = address
 
+
 def JBE(cpu, ins):
     source_value = get_value(cpu, ins.source)
     target_value = get_value(cpu, ins.target)
     address = get_value(cpu, ins.parameter)
     if source_value <= target_value:
         cpu.register.pc = address
+
 
 def JNE(cpu, ins):
     source_value = get_value(cpu, ins.source)

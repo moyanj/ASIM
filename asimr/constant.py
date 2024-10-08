@@ -6,6 +6,7 @@ import importlib.metadata as im
 
 __version__ = im.version("asim")
 
+
 class InstructionSet(Enum):
     def _generate_next_value_(name, start, count, last_values):
         return (start - 1) + count
@@ -30,9 +31,9 @@ class InstructionSet(Enum):
     JZ = auto()  # 为 0 时转移
     JE = auto()  # 等于时转移
     JG = auto()  # 大于转移
-    JGE = auto() # 大于等于转移
+    JGE = auto()  # 大于等于转移
     JB = auto()  # 小于转移
-    JBE = auto() # 小于等于转移
+    JBE = auto()  # 小于等于转移
     JNE = auto()  # 不等于转移
     NOP = auto()  # 无操作
     CPUID = auto()  # TODO: 获取CPU信息
@@ -44,7 +45,7 @@ class InstructionSet(Enum):
     SDF = auto()  # TODO: 定义函数（开始）
     CALL = auto()  # TODO: 调用
     RET = auto()  # TODO: 返回
-    SYSCALL = auto() # TODO: 系统调用  
+    SYSCALL = auto()  # TODO: 系统调用
 
     PNC = auto()  # 打印数字
     PAC = auto()  # 打印ASCII码

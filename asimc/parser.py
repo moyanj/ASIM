@@ -150,7 +150,7 @@ class CodeParser:
             elif op.startswith("#"):  # 标签
                 type = OperandType.Number
                 n = self.out.labels.get(op[1:], -1)
-                
+
                 if n != -1:
                     value = n
                 else:

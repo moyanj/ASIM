@@ -9,6 +9,7 @@ from asimc.parser import Parser
 from asimc.funcs import funcs
 from asimr.constant import tmp, __version__
 
+
 def asm(file, output_file, pretend, include_dir=None, worker=1, level=5):
 
     if output_file is None and pretend:
