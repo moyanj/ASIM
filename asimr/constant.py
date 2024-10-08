@@ -38,9 +38,9 @@ class InstructionSet(Enum):
     NOP = auto()  # 无操作
     CPUID = auto()  # TODO: 获取CPU信息
 
-    MPC = auto()  # TODO: 复制pc寄存器的值
-    MSR = auto()  # TODO: 复制状态寄存器的值
-    MTC = auto()  # TODO: 复制频率寄存器的值
+    MPC = auto()  # 复制pc寄存器的值
+    MSR = auto()  # 复制状态寄存器的值
+    MTC = auto()  # 复制频率寄存器的值
 
     SDF = auto()  # TODO: 定义函数（开始）
     CALL = auto()  # TODO: 调用
