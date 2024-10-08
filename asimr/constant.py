@@ -43,8 +43,8 @@ class InstructionSet(Enum):
     MTC = auto()  # 复制频率寄存器的值
 
     SDF = auto()  # TODO: 定义函数（开始）
-    CALL = auto()  # TODO: 调用
-    RET = auto()  # TODO: 返回
+    CALL = auto()  # 调用
+    RET = auto()  # 返回
     SYSCALL = auto()  # TODO: 系统调用
 
     PNC = auto()  # 打印数字
