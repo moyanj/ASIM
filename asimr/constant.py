@@ -2,9 +2,8 @@ from enum import Enum, auto
 import sys
 from dataclasses import dataclass, field
 import time
-import importlib.metadata as im
 
-__version__ = im.version("asim")
+__version__ = "0.0.1"
 
 
 class InstructionSet(Enum):

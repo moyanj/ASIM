@@ -27,4 +27,4 @@ format:
 
 # 运行测试
 test: format
-	$(POETRY) run pytest --html=report.html --self-contained-html
+	$(POETRY) run pytest --html=report.html --self-contained-html test

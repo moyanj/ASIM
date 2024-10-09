@@ -2,6 +2,7 @@ from asimc.cache import LRUCache
 from asimc.parser import Parser, CodeParser
 import asimc.funcs as asim_f
 from asimr.constant import tmp, InstructionSet
+from asimr.core import Instruction
 import pytest
 
 
@@ -80,6 +81,18 @@ def test_comment():
     code = "MOV 1 1 r_1 ; vvvv \n;sss"
     p = CodeParser()
     p.parser(code.split("\n"))
+    out = Instruction.unpack(p.out.instructions[0])
+    assert out.opcode == InstructionSet.MOV
+
+
+def test_inst():
+    code = ["MOV 1 r_1"]
+    p = CodeParser()
+    p.parser(code)
+    out = Instruction.unpack(p.out.instructions[0])
+    assert out.opcode == InstructionSet.MOV
+    assert out.source.value == 1
+    assert out.target.value == 1
 
 
 # 运行测试
