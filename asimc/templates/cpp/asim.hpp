@@ -53,26 +53,22 @@ public:
 
 // 定义一个结构体来模拟寄存器
 struct Register {
-    unsigned short gpr[16];  // 通用寄存器数组
+    unsigned short* gpr;
     unsigned int pc = 0;      // 程序计数器
     unsigned int sr = 0;      // 状态寄存器
     unsigned int tc = 0;      // 时间计数器
 
-    // 构造函数，初始化寄存器的值
-    Register() : pc(0), sr(0), tc(0) {
-        for (auto& reg : gpr) {
-            reg = 0;
+    Register(int size) {
+        gpr = new unsigned short[size]();
+        for (int i = 0; i < size; ++i) {
+            gpr[i] = 0;
         }
+    }
+
+    ~Register() {
+        delete[] gpr;
     }
 };
 
-// 全局寄存器实例
-Register asim_reg;
-
-// 模拟数据内存的全局数组
-unsigned short asim_mem[8 * 1024 * 1024];
-
-// 创建一个大小为128的栈实例
-Stack<short> asim_stack(128);
 
 #endif
