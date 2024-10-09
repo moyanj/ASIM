@@ -70,5 +70,34 @@ struct Register {
     }
 };
 
+class Memory {
+private:
+    std::vector<char> memory;
+
+public:
+    // 构造函数，初始化指定大小的内存
+    explicit Memory(size_t size) : memory(size, 0) {}
+
+    // 读取内存中的一个字节
+    unsigned char read(size_t address) const {
+        if (address >= memory.size()) {
+            throw std::out_of_range("Address out of range");
+        }
+        return memory[address];
+    }
+
+    // 向内存写入一个字节
+    void write(size_t address, unsigned char value) {
+        if (address >= memory.size()) {
+            throw std::out_of_range("Address out of range");
+        }
+        memory[address] = value;
+    }
+
+    // 获取内存大小
+    size_t getSize() const {
+        return memory.size();
+    }
+};
 
 #endif

@@ -2,7 +2,7 @@
 #include <iostream>
 
 // 模拟数据内存的全局数组
-unsigned short asim_mem[{{ data_mem }}];
+Memory asim_mem({{ data_mem }});
 
 // 创建一个大小为128的栈实例
 Stack<short> asim_stack({{ stack_size }});
