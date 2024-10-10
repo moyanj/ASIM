@@ -168,3 +168,4 @@ report.html
 *.build/
 *.dist/
 *.onefile-build/
+t.txt

@@ -28,3 +28,6 @@ format:
 # 运行测试
 test: format
 	$(POETRY) run pytest --html=report.html --self-contained-html test
+	
+cloc:
+	cloc . --exclude-ext=md,yml,toml,ac,mak
