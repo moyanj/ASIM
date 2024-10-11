@@ -26,10 +26,9 @@ sudo apt install asim
 将以下代码写入`t.ac`
 
 ```
-% for i, v in enumerate(str2list("Hello World!"))):
-MOV ${v} &${i}
-PAC &${i}
-% endfor
+% for i, v in str2list("Hello World!"): %
+PAC {i}
+% endfor %
 ```
 使用`asimc`编译代码：
 

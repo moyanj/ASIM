@@ -1,11 +1,11 @@
 # ASIM
 
-ASIM是一门汇编脚本语言，它基于一个高性能的CPU模拟器
+ASIM是一款编程语言，它以一个高性能CPU模拟器为基础，提供了强大的脚本编写能力。
 
 ## 安装指南
 
-### 使用Pypi
-快速安装ASIM，只需运行以下命令：
+### 使用Pypi安装
+
 ```bash
 pip install asim
 ```
@@ -26,14 +26,14 @@ sudo apt install asim
 将以下代码写入`t.ac`
 
 ```
-% for v in str2list("Hello World!"):
-PAC ${V}
-% endfor
+% for i, v in str2list("Hello World!"): %
+PAC {i}
+% endfor %
 ```
 使用`asimc`编译代码：
 
 ```bash
-asimc t.ac -o t.acb
+asimc t.ac
 ```
 使用`asimr`运行代码：
 
