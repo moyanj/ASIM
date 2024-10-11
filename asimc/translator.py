@@ -3,7 +3,7 @@ from asimr.constant import Program
 from asimr.core import Instruction
 from jinja2 import Environment, FileSystemLoader
 import os
-
+import tempfile
 
 def run_command(command):
     result = subprocess.run(
@@ -49,7 +49,7 @@ class CppTranslator:
             name = inst.opcode.name
             if hasattr(self, "inst_" + name):
                 func = getattr(self, "inst_" + name)
-                func(inst)
+                self.items.append(func(inst))
             else:
                 raise TypeError("Unsupported instruction")
 
@@ -60,11 +60,23 @@ class CppTranslator:
                 )
             )
         )
-
+        
         tp = env.get_template("main.cpp")
         return tp.render(
             data_mem=self.p.data_mem,
             stack_size=self.p.stack_size,
             n_GPR=self.p.n_GPR,
             items=self.items,
+            enumerate=enumerate
         )
+        
+    def tran(self, file, output, compile):
+        path = os.path.abspath(file)
+        if compile:
+            run_command(f'{self.compile} -I {os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates", "cpp")} -o {output} {path}')
+        else:
+            with open(output, 'w') as f:
+                f.write(open(path).read())
+            
+    def inst_PNC(self, inst):
+        return 'cout << "666" << endl;'
