@@ -1,6 +1,6 @@
 # 语法
 
-ASIM的预处理器是[`Mako`](https://www.makotemplates.org/)，因此ASIM的语法是基于Mako的。
+ASIM的预处理器是[`Jinja2`](https://www.makotemplates.org/)，因此ASIM的语法是基于Mako的。
 
 若您需要学习Mako的语法，参见[此处](https://docs.makotemplates.org/en/latest/syntax.html)
 
@@ -48,4 +48,18 @@ ASIM的预处理器是[`Mako`](https://www.makotemplates.org/)，因此ASIM的�
 
 ## 函数定义与调用
 
-它依赖于`SDF`，`EDF`，`CALL`，`RET`
+它依赖于`SDF`，`CALL`，`RET`
+
+示例：
+
+```
+SDF print
+PNC r_0
+RET
+
+MOV 1 r_0
+CALL print
+```
+
+`SDF`用于定义一个函数，从`SDF`到`RET`的代码在被调用之前不会被执行。
+`CALL`指令将会把当前的pc寄存器的值压入栈中。在执行`RET`时，将会弹出那个地址
